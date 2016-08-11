@@ -26,7 +26,7 @@
 <p><strong><code>explain</code></strong>查看：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; explain select * from a where id=1 or uid =2;</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra       |</div><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">|  1 | SIMPLE      | a     | ALL  | PRIMARY       | NULL | NULL    | NULL |    5 | Using where |</div><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
-<h3 id="用UNION替换OR-适用于索引列"><a href="#用UNION替换OR-适用于索引列" class="headerlink" title="用UNION替换OR (适用于索引列)"></a>用UNION替换OR (适用于索引列)</h3><p>通常情况下, 用UNION替换WHERE子句中的OR将会起到较好的效果. 对索引列使用OR将造成全表扫描. </p>
+<h3 id="用UNION替换OR-适用于索引列"><a href="#用UNION替换OR-适用于索引列" class="headerlink" title="用UNION替换OR (适用于索引列)"></a>用<code>UNION</code>替换<code>OR</code> (适用于索引列)</h3><p>通常情况下, 用UNION替换WHERE子句中的OR将会起到较好的效果. 对索引列使用OR将造成全表扫描. </p>
 <blockquote>
 <p><strong><em>注意:</em></strong>以上规则只针对多个索引列有效. 如果有column没有被索引, 查询效率可能会因为你没有选择OR而降低.  在下面的例子中, LOC_ID 和REGION上都建有索引.</p>
 </blockquote>

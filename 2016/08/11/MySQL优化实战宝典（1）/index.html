@@ -22,12 +22,12 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL优化实战宝典（1）">
 <meta property="og:url" content="http://blog.pigo.top/2016/08/11/MySQL优化实战宝典（1）/index.html">
-<meta property="og:site_name" content="Pigo残的博客">
+<meta property="og:site_name" content="Pigo残的Madhouses">
 <meta property="og:description" content="Or条件可以利用索引儿避免全表扫描
 一般在mysql中，在查询语句语句中带有or关键字时，会造成全表扫表，接下来我们着重分析下，哪些情况下可以避免全表扫面
 
 当where语句里面带or关键字时，myisam引擎可以利用索引，而innodb不行">
-<meta property="og:updated_time" content="2016-08-11T16:42:36.000Z">
+<meta property="og:updated_time" content="2016-08-11T16:50:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL优化实战宝典（1）">
 <meta name="twitter:description" content="Or条件可以利用索引儿避免全表扫描
@@ -38,7 +38,7 @@
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
 
-    <link rel="alternative" href="/atom.xml" title="Pigo残的博客" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Pigo残的Madhouses" type="application/atom+xml">
 
 
 
@@ -65,7 +65,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>MySQL优化实战宝典（1） | Pigo残的博客</title>
+<title>MySQL优化实战宝典（1） | Pigo残的Madhouses</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -343,7 +343,7 @@
 <p><strong><code>explain</code></strong>查看：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; explain select * from a where id=1 or uid =2;</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra       |</div><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">|  1 | SIMPLE      | a     | ALL  | PRIMARY       | NULL | NULL    | NULL |    5 | Using where |</div><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
-<h3 id="用UNION替换OR-适用于索引列"><a href="#用UNION替换OR-适用于索引列" class="headerlink" title="用UNION替换OR (适用于索引列)"></a>用UNION替换OR (适用于索引列)</h3><p>通常情况下, 用UNION替换WHERE子句中的OR将会起到较好的效果. 对索引列使用OR将造成全表扫描. </p>
+<h3 id="用UNION替换OR-适用于索引列"><a href="#用UNION替换OR-适用于索引列" class="headerlink" title="用UNION替换OR (适用于索引列)"></a>用<code>UNION</code>替换<code>OR</code> (适用于索引列)</h3><p>通常情况下, 用UNION替换WHERE子句中的OR将会起到较好的效果. 对索引列使用OR将造成全表扫描. </p>
 <blockquote>
 <p><strong><em>注意:</em></strong>以上规则只针对多个索引列有效. 如果有column没有被索引, 查询效率可能会因为你没有选择OR而降低.  在下面的例子中, LOC_ID 和REGION上都建有索引.</p>
 </blockquote>
@@ -420,7 +420,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"MySQL优化实战宝典（1）　| Pigo残的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"MySQL优化实战宝典（1）　| Pigo残的Madhouses　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 

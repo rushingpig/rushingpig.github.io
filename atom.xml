@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Pigo残的博客</title>
+  <title>Pigo残的Madhouses</title>
   <subtitle>追梦赤子心 | 人的一切痛苦，本质上都是对自己无能的愤怒</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.pigo.top/"/>
-  <updated>2016-08-11T16:42:36.000Z</updated>
+  <updated>2016-08-11T16:50:53.000Z</updated>
   <id>http://blog.pigo.top/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://blog.pigo.top/2016/08/11/MySQL%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8%EF%BC%881%EF%BC%89/"/>
     <id>http://blog.pigo.top/2016/08/11/MySQL优化实战宝典（1）/</id>
     <published>2016-08-11T15:57:47.000Z</published>
-    <updated>2016-08-11T16:42:36.000Z</updated>
+    <updated>2016-08-11T16:50:53.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Or条件可以利用索引儿避免全表扫描"><a href="#Or条件可以利用索引儿避免全表扫描" class="headerlink" title="Or条件可以利用索引儿避免全表扫描"></a>Or条件可以利用索引儿避免全表扫描</h2><blockquote>
 <p>一般在mysql中，在查询语句语句中带有<code>or</code>关键字时，会造成全表扫表，接下来我们着重分析下，哪些情况下可以避免全表扫面</p>
@@ -42,7 +42,7 @@
 <p><strong><code>explain</code></strong>查看：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; explain select * from a where id=1 or uid =2;</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra       |</div><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">|  1 | SIMPLE      | a     | ALL  | PRIMARY       | NULL | NULL    | NULL |    5 | Using where |</div><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
-<h3 id="用UNION替换OR-适用于索引列"><a href="#用UNION替换OR-适用于索引列" class="headerlink" title="用UNION替换OR (适用于索引列)"></a>用UNION替换OR (适用于索引列)</h3><p>通常情况下, 用UNION替换WHERE子句中的OR将会起到较好的效果. 对索引列使用OR将造成全表扫描. </p>
+<h3 id="用UNION替换OR-适用于索引列"><a href="#用UNION替换OR-适用于索引列" class="headerlink" title="用UNION替换OR (适用于索引列)"></a>用<code>UNION</code>替换<code>OR</code> (适用于索引列)</h3><p>通常情况下, 用UNION替换WHERE子句中的OR将会起到较好的效果. 对索引列使用OR将造成全表扫描. </p>
 <blockquote>
 <p><strong><em>注意:</em></strong>以上规则只针对多个索引列有效. 如果有column没有被索引, 查询效率可能会因为你没有选择OR而降低.  在下面的例子中, LOC_ID 和REGION上都建有索引.</p>
 </blockquote>
@@ -88,7 +88,7 @@
     <link href="http://blog.pigo.top/2015/06/15/%E7%9B%91%E6%8E%A7CDN%E7%9A%84%E5%8E%89%E5%AE%B3shell-0-0/"/>
     <id>http://blog.pigo.top/2015/06/15/监控CDN的厉害shell-0-0/</id>
     <published>2015-06-15T10:19:56.000Z</published>
-    <updated>2015-06-15T10:19:56.000Z</updated>
+    <updated>2016-08-11T16:56:23.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>先说说基本的思路，然后再贴上详细的代码</p>
 <a id="more"></a>
