@@ -15,16 +15,25 @@
 
 
 
-<meta name="description" content="写在前面先说说基本的思路，然后再贴上详细的代码">
+<meta name="description" content="Or条件可以利用索引儿避免全表扫描
+一般在mysql中，在查询语句语句中带有or关键字时，会造成全表扫表，接下来我们着重分析下，哪些情况下可以避免全表扫面
+
+1.当where语句里面带or关键字时，myisam引擎可以利用索引，而innodb不行">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何通过shell监控CDN是否正常">
-<meta property="og:url" content="http://blog.pigo.top/2015/06/15/监控CDN的厉害shell-0-0/index.html">
+<meta property="og:title" content="MySQL优化实战宝典（1）">
+<meta property="og:url" content="http://blog.pigo.top/2016/08/11/MySQL优化实战宝典（1）/index.html">
 <meta property="og:site_name" content="Pigo残的博客">
-<meta property="og:description" content="写在前面先说说基本的思路，然后再贴上详细的代码">
-<meta property="og:updated_time" content="2015-06-15T10:19:56.000Z">
+<meta property="og:description" content="Or条件可以利用索引儿避免全表扫描
+一般在mysql中，在查询语句语句中带有or关键字时，会造成全表扫表，接下来我们着重分析下，哪些情况下可以避免全表扫面
+
+1.当where语句里面带or关键字时，myisam引擎可以利用索引，而innodb不行">
+<meta property="og:updated_time" content="2016-08-11T16:13:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何通过shell监控CDN是否正常">
-<meta name="twitter:description" content="写在前面先说说基本的思路，然后再贴上详细的代码">
+<meta name="twitter:title" content="MySQL优化实战宝典（1）">
+<meta name="twitter:description" content="Or条件可以利用索引儿避免全表扫描
+一般在mysql中，在查询语句语句中带有or关键字时，会造成全表扫表，接下来我们着重分析下，哪些情况下可以避免全表扫面
+
+1.当where语句里面带or关键字时，myisam引擎可以利用索引，而innodb不行">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +65,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>如何通过shell监控CDN是否正常 | Pigo残的博客</title>
+<title>MySQL优化实战宝典（1） | Pigo残的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -276,11 +285,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-监控CDN的厉害shell-0-0" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-MySQL优化实战宝典（1）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/06/15/监控CDN的厉害shell-0-0/" class="article-date">
-      <time datetime="2015-06-15T10:19:56.000Z" itemprop="datePublished">2015-06-15</time>
+      <a href="/2016/08/11/MySQL优化实战宝典（1）/" class="article-date">
+      <time datetime="2016-08-11T15:57:47.000Z" itemprop="datePublished">2016-08-11</time>
 </a>
     </div>
   
@@ -293,7 +302,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      如何通过shell监控CDN是否正常
+      MySQL优化实战宝典（1）
     </h1>
   
 
@@ -302,15 +311,11 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
     </div>
 
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CDN/">CDN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -318,9 +323,44 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>先说说基本的思路，然后再贴上详细的代码</p>
-<a id="more"></a>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash </span></div><div class="line"><span class="comment"># </span></div><div class="line"><span class="comment">#script_name:chk_cdn.sh </span></div><div class="line"><span class="comment">#check cdn index.html </span></div><div class="line"><span class="comment">#Domain name resolution </span></div><div class="line"><span class="comment"># </span></div><div class="line"><span class="comment">#last update 20130320 by dongnan </span></div><div class="line"><span class="comment">#bbs# http://bbs.ywwd.net/ </span></div><div class="line"><span class="comment">#blog# http://dngood.blog.51cto.com </span></div><div class="line"><span class="comment"># </span></div><div class="line"><span class="comment">#tail error.log  </span></div><div class="line"><span class="comment">#curl: (6) name lookup timed out </span></div><div class="line"><span class="comment">#variables  </span></div><div class="line"><span class="comment">#check_time=2        #检查间隔时间,2s </span></div><div class="line">check_count=8        <span class="comment">#故障后检查次数,8次 </span></div><div class="line">fault_count=4        <span class="comment">#故障次数大于(4次),则认为不可用 </span></div><div class="line">www_url=<span class="string">"http://www.test.com"</span></div><div class="line">domain=www.test.com </div><div class="line">sh_dir=/root/sh/ </div><div class="line">crondir=<span class="variable">$&#123;sh_dir&#125;</span>crontab </div><div class="line">error_log=<span class="variable">$&#123;crondir&#125;</span>/<span class="built_in">log</span>/cdn_error.log </div><div class="line">flag_file=<span class="variable">$&#123;crondir&#125;</span>/<span class="built_in">log</span>/cdn.flag </div><div class="line"><span class="built_in">echo</span>=/bin/<span class="built_in">echo</span> </div><div class="line">curl=/usr/bin/curl </div><div class="line">options=<span class="string">'--connect-timeout 3 -IL -A "check_cdn_www"'</span></div><div class="line"><span class="built_in">source</span> <span class="variable">$&#123;sh_dir&#125;</span>/CONFIG </div><div class="line"><span class="comment">#main </span></div><div class="line"><span class="built_in">test</span> <span class="_">-e</span> <span class="string">"<span class="variable">$&#123;crondir&#125;</span>/log"</span> || mkdir -p <span class="string">"<span class="variable">$&#123;crondir&#125;</span>/log"</span> </div><div class="line"><span class="comment">#true </span></div><div class="line"><span class="keyword">if</span> <span class="variable">$curl</span> <span class="variable">$options</span> <span class="variable">$www_url</span> &gt; /dev/null 2&gt;&amp;1 ;<span class="keyword">then</span> </div><div class="line"><span class="comment">#flag </span></div><div class="line">    <span class="keyword">if</span> [ <span class="_">-f</span> <span class="variable">$flag_file</span> ];<span class="keyword">then</span> </div><div class="line">        <span class="comment">#sms </span></div><div class="line">        <span class="comment">#for mobile in $MOBILES; do </span></div><div class="line">            <span class="comment">#$echo "cdn_www ok" | /usr/local/bin/gammu --sendsms TEXT "$mobile" -unicode </span></div><div class="line">            <span class="comment">#$echo "cdn_www_index.html ok" </span></div><div class="line">        <span class="variable">$done</span> </div><div class="line">        <span class="comment">#email </span></div><div class="line">        <span class="keyword">for</span> mail <span class="keyword">in</span> <span class="variable">$MAILS</span>;<span class="keyword">do</span> </div><div class="line">            <span class="variable">$echo</span> <span class="string">"<span class="variable">$domain</span> ok"</span> | mail <span class="_">-s</span> <span class="string">"cdn ok"</span> <span class="variable">$mail</span> </div><div class="line">        <span class="keyword">done</span> </div><div class="line">        <span class="comment">#flag </span></div><div class="line">        <span class="built_in">test</span> <span class="_">-e</span> <span class="string">"<span class="variable">$flag_file</span>"</span> &amp;&amp; rm <span class="_">-f</span> <span class="string">"<span class="variable">$flag_file</span>"</span> </div><div class="line">    <span class="keyword">fi</span> </div><div class="line"><span class="comment">#false </span></div><div class="line"><span class="keyword">else</span> </div><div class="line"><span class="comment">#flag真退出脚本 </span></div><div class="line">    <span class="built_in">test</span> <span class="_">-e</span> <span class="variable">$flag_file</span> &amp;&amp; <span class="built_in">exit</span> 0 </div><div class="line">check_failed=0</div><div class="line">    <span class="comment"># </span></div><div class="line">    <span class="keyword">for</span>((i=1;i&lt;=<span class="string">"<span class="variable">$check_count</span>"</span>;i++));<span class="keyword">do</span> </div><div class="line">check_date=$(date <span class="string">'+ %F %T'</span>) </div><div class="line">        <span class="comment">#curl 值取反 </span></div><div class="line">        <span class="keyword">if</span> ! <span class="variable">$curl</span> <span class="variable">$options</span> <span class="variable">$www_url</span> &gt; /dev/null 2&gt;&amp;1;<span class="keyword">then</span> </div><div class="line">            <span class="comment">#变量加1 </span></div><div class="line">            ((check_failed++)) </div><div class="line">            <span class="comment">#error.log </span></div><div class="line">            <span class="variable">$echo</span> <span class="string">"<span class="variable">$(/bin/date +'%F %T')</span> <span class="variable">$www_url</span> <span class="variable">$check_failed</span> fault"</span> &gt;&gt; <span class="string">"<span class="variable">$error_log</span>"</span> </div><div class="line">            /usr/bin/dig <span class="string">"<span class="variable">$domain</span>"</span> &gt;&gt; <span class="string">"<span class="variable">$error_log</span>"</span> </div><div class="line">            <span class="comment"># </span></div><div class="line">            sleep 1 </div><div class="line">        <span class="keyword">fi</span> </div><div class="line">    <span class="keyword">done</span> </div><div class="line">    <span class="comment"># </span></div><div class="line">    <span class="keyword">if</span> [ <span class="string">"<span class="variable">$check_failed</span>"</span> <span class="_">-gt</span> <span class="string">"<span class="variable">$fault_count</span>"</span> ];<span class="keyword">then</span> </div><div class="line">         <span class="comment">#sms </span></div><div class="line">         <span class="comment">#for mobile in $MOBILES;do </span></div><div class="line">             <span class="comment">#$echo "www_cdn_index.html error" | /usr/local/bin/gammu --sendsms TEXT "$mobile" -unicode </span></div><div class="line">             <span class="comment">#/bin/date +'%F %T' &amp;&amp; $echo "www_cdn_index.html error" </span></div><div class="line">         <span class="comment">#done </span></div><div class="line">         <span class="comment">#email </span></div><div class="line">         <span class="keyword">for</span> mail <span class="keyword">in</span> <span class="variable">$MAILS</span>;<span class="keyword">do</span> </div><div class="line">             <span class="variable">$echo</span> <span class="string">"<span class="variable">$domain</span> error"</span> | mail <span class="_">-s</span> <span class="string">"cdn error"</span> <span class="variable">$mail</span> </div><div class="line">         <span class="keyword">done</span> </div><div class="line">         <span class="comment">#flag </span></div><div class="line">         <span class="variable">$echo</span> <span class="string">"cdn_www_index.html error"</span> &gt; <span class="string">"<span class="variable">$flag_file</span>"</span> </div><div class="line">         <span class="comment">#log </span></div><div class="line">    <span class="keyword">fi</span> </div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
+        <h2 id="Or条件可以利用索引儿避免全表扫描"><a href="#Or条件可以利用索引儿避免全表扫描" class="headerlink" title="Or条件可以利用索引儿避免全表扫描"></a>Or条件可以利用索引儿避免全表扫描</h2><blockquote>
+<p>一般在mysql中，在查询语句语句中带有<code>or</code>关键字时，会造成全表扫表，接下来我们着重分析下，哪些情况下可以避免全表扫面</p>
+</blockquote>
+<h4 id="1-当where语句里面带or关键字时，myisam引擎可以利用索引，而innodb不行"><a href="#1-当where语句里面带or关键字时，myisam引擎可以利用索引，而innodb不行" class="headerlink" title="1.当where语句里面带or关键字时，myisam引擎可以利用索引，而innodb不行"></a>1.当<code>where</code>语句里面带<code>or</code>关键字时，<code>myisam</code>引擎可以利用索引，而<code>innodb</code>不行</h4><a id="more"></a>
+<ul>
+<li><strong>myisam</strong>表</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE IF NOT EXISTS `a` (</div><div class="line">  `id` int(1) NOT NULL AUTO_INCREMENT,</div><div class="line">  `uid` int(11) NOT NULL,</div><div class="line">  `aNum` char(20) DEFAULT NULL,</div><div class="line">  PRIMARY KEY (`id`),</div><div class="line">  KEY `uid` (`uid`)</div><div class="line">) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;</div><div class="line"></div><div class="line">mysql&gt; explain select * from a where id=1 or uid =2;</div><div class="line">+----+-------------+-------+-------------+---------------+-------------+---------+------+------+---------------------------------------+</div><div class="line">| id | select_type | table | type        | possible_keys | key         | key_len | ref  | rows | Extra                                 |</div><div class="line">+----+-------------+-------+-------------+---------------+-------------+---------+------+------+---------------------------------------+</div><div class="line">|  1 | SIMPLE      | a     | index_merge | PRIMARY,uid   | PRIMARY,uid | 4,4     | NULL |    2 | Using union(PRIMARY,uid); Using where |</div><div class="line">+----+-------------+-------+-------------+---------------+-------------+---------+------+------+---------------------------------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>innodb</strong>表</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE IF NOT EXISTS `a` (</div><div class="line">  `id` int(1) NOT NULL AUTO_INCREMENT,</div><div class="line">  `uid` int(11) NOT NULL,</div><div class="line">  `aNum` char(20) DEFAULT NULL,</div><div class="line">  PRIMARY KEY (`id`),</div><div class="line">  KEY `uid` (`uid`)</div><div class="line">) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;</div><div class="line"></div><div class="line"></div><div class="line">mysql&gt;  explain select * from a where id=1 or uid =2;</div><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra       |</div><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">|  1 | SIMPLE      | a     | ALL  | PRIMARY,uid   | NULL | NULL    | NULL |    5 | Using where |</div><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
+<p>####2.必须所有的字段都带有独立索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`a`</span> (</div><div class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">1</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</div><div class="line">  <span class="string">`uid`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`aNum`</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</div><div class="line">) <span class="keyword">ENGINE</span>=MyISAM AUTO_INCREMENT=<span class="number">6</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=latin1 |</div></pre></td></tr></table></figure>
+<p><strong><code>explain</code></strong>查看：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mysql&gt; explain select * from a where id=1 or uid =2;</div><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra       |</div><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">|  1 | SIMPLE      | a     | ALL  | PRIMARY       | NULL | NULL    | NULL |    5 | Using where |</div><div class="line">+----+-------------+-------+------+---------------+------+---------+------+------+-------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
+<p>####3.用UNION替换OR (适用于索引列)<br>通常情况下, 用UNION替换WHERE子句中的OR将会起到较好的效果. 对索引列使用OR将造成全表扫描. </p>
+<blockquote>
+<p><strong><em>注意:</em></strong>以上规则只针对多个索引列有效. 如果有column没有被索引, 查询效率可能会因为你没有选择OR而降低.  在下面的例子中, LOC_ID 和REGION上都建有索引.</p>
+</blockquote>
+<ul>
+<li>高效</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> loc_id , loc_desc , region <span class="keyword">from</span> location <span class="keyword">where</span> loc_id = <span class="number">10</span>   </div><div class="line"><span class="keyword">union</span>   </div><div class="line"><span class="keyword">select</span> loc_id , loc_desc , region  <span class="keyword">from</span> location <span class="keyword">where</span> region = <span class="string">"melbourne"</span></div></pre></td></tr></table></figure>
+<ul>
+<li>低效</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> loc_id , loc <span class="keyword">desc</span> , region <span class="keyword">from</span> location <span class="keyword">where</span> loc_id = <span class="number">10</span> <span class="keyword">or</span> region = <span class="string">"melbourne"</span></div></pre></td></tr></table></figure>
+<p>如果你坚持要用OR, 那就需要返回记录最少的索引列写在最前面.</p>
+<p>####4.用<code>in</code>来替换<code>or</code><br>这是一条简单易记的规则，但是实际的执行效果还须检验，在mysql下，两者的执行路径似乎是相同的．</p>
+<ul>
+<li>低效</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span>…. <span class="keyword">from</span> location <span class="keyword">where</span> loc_id = <span class="number">10</span> <span class="keyword">or</span> loc_id = <span class="number">20</span> <span class="keyword">or</span> loc_id = <span class="number">30</span></div></pre></td></tr></table></figure>
+<ul>
+<li>高效</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span>… <span class="keyword">from</span> location <span class="keyword">where</span> loc_in  <span class="keyword">in</span> (<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>);</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -331,12 +371,12 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/08/11/MySQL优化实战宝典（1）/">
-                    MySQL优化实战宝典（1）
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/06/15/监控CDN的厉害shell-0-0/">
+                    如何通过shell监控CDN是否正常
                 </a>
             </div>
-        
         
     </nav>
 
@@ -345,7 +385,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Or条件可以利用索引儿避免全表扫描"><span class="toc-number">1.</span> <span class="toc-text">Or条件可以利用索引儿避免全表扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-当where语句里面带or关键字时，myisam引擎可以利用索引，而innodb不行"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.当where语句里面带or关键字时，myisam引擎可以利用索引，而innodb不行</span></a></li></ol></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn,
@@ -376,7 +416,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"如何通过shell监控CDN是否正常　| Pigo残的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"MySQL优化实战宝典（1）　| Pigo残的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -392,7 +432,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" data-thread-key="2015/06/15/监控CDN的厉害shell-0-0/" data-title="如何通过shell监控CDN是否正常" data-url="http://blog.pigo.top/2015/06/15/监控CDN的厉害shell-0-0/"></div>
+    <div class="ds-thread" data-thread-key="2016/08/11/MySQL优化实战宝典（1）/" data-title="MySQL优化实战宝典（1）" data-url="http://blog.pigo.top/2016/08/11/MySQL优化实战宝典（1）/"></div>
     <script>
         var duoshuoQuery = {short_name:"rushingpig"};
         var loadComment = function(){
@@ -415,15 +455,15 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/08/11/MySQL优化实战宝典（1）/" title="上一篇: MySQL优化实战宝典（1）">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2015/06/15/监控CDN的厉害shell-0-0/" title="下一篇: 如何通过shell监控CDN是否正常">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
