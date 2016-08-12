@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.pigo.top/"/>
-  <updated>2016-08-12T05:34:28.000Z</updated>
+  <updated>2016-08-12T13:49:07.000Z</updated>
   <id>http://blog.pigo.top/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://blog.pigo.top/2016/08/12/Linux%E4%B8%8BSSH%E8%AE%BE%E7%BD%AE%E5%85%8D%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/"/>
     <id>http://blog.pigo.top/2016/08/12/Linux下SSH设置免密码登录/</id>
     <published>2016-08-12T05:20:51.000Z</published>
-    <updated>2016-08-12T05:34:28.000Z</updated>
+    <updated>2016-08-12T13:49:07.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="执行环境"><a href="#执行环境" class="headerlink" title="执行环境"></a>执行环境</h2><ul>
 <li>CentOS 6.5</li>
@@ -61,7 +61,7 @@
     
     </summary>
     
-      <category term="Linux" scheme="http://blog.pigo.top/categories/Linux/"/>
+      <category term="linux" scheme="http://blog.pigo.top/categories/linux/"/>
     
     
       <category term="SSH" scheme="http://blog.pigo.top/tags/SSH/"/>
@@ -75,7 +75,7 @@
     <link href="http://blog.pigo.top/2016/08/11/MySQL%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8%EF%BC%881%EF%BC%89/"/>
     <id>http://blog.pigo.top/2016/08/11/MySQL优化实战宝典（1）/</id>
     <published>2016-08-11T15:57:47.000Z</published>
-    <updated>2016-08-11T16:50:53.000Z</updated>
+    <updated>2016-08-12T13:49:11.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Or条件可以利用索引儿避免全表扫描"><a href="#Or条件可以利用索引儿避免全表扫描" class="headerlink" title="Or条件可以利用索引儿避免全表扫描"></a>Or条件可以利用索引儿避免全表扫描</h2><blockquote>
 <p>一般在mysql中，在查询语句语句中带有<code>or</code>关键字时，会造成全表扫表，接下来我们着重分析下，哪些情况下可以避免全表扫面</p>
@@ -143,7 +143,7 @@
     <link href="http://blog.pigo.top/2015/06/15/%E7%9B%91%E6%8E%A7CDN%E7%9A%84%E5%8E%89%E5%AE%B3shell-0-0/"/>
     <id>http://blog.pigo.top/2015/06/15/监控CDN的厉害shell-0-0/</id>
     <published>2015-06-15T10:19:56.000Z</published>
-    <updated>2016-08-12T13:44:39.000Z</updated>
+    <updated>2016-08-12T13:49:03.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>先说说基本的思路，然后再贴上详细的代码</p>
 <a id="more"></a>
@@ -155,7 +155,7 @@
     
     </summary>
     
-      <category term="Linux" scheme="http://blog.pigo.top/categories/Linux/"/>
+      <category term="linux" scheme="http://blog.pigo.top/categories/linux/"/>
     
     
       <category term="shell" scheme="http://blog.pigo.top/tags/shell/"/>
