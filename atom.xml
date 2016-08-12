@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.pigo.top/"/>
-  <updated>2016-08-11T16:50:53.000Z</updated>
+  <updated>2016-08-12T05:33:25.000Z</updated>
   <id>http://blog.pigo.top/</id>
   
   <author>
@@ -14,6 +14,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux下SSH设置免密码登录</title>
+    <link href="http://blog.pigo.top/2016/08/12/Linux%E4%B8%8BSSH%E8%AE%BE%E7%BD%AE%E5%85%8D%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/"/>
+    <id>http://blog.pigo.top/2016/08/12/Linux下SSH设置免密码登录/</id>
+    <published>2016-08-12T05:20:51.000Z</published>
+    <updated>2016-08-12T05:33:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="执行环境"><a href="#执行环境" class="headerlink" title="执行环境"></a>执行环境</h2><ul>
+<li>CentOS 6.5</li>
+</ul>
+<h2 id="概念科普"><a href="#概念科普" class="headerlink" title="概念科普"></a>概念科普</h2><p>通过配置 SSH 免密码登录，你可以享受到如下的便利：</p>
+<ul>
+<li>用脚本实现日常工作的自动化。</li>
+<li>增强 Linux 服务器的安全性。这是防范虚拟专用服务器（VPS）遭受暴力破解攻击的一个推荐的方法，SSH 密钥单凭暴力破解是几乎不可攻破的。</li>
+</ul>
+<h3 id="什么是-ssh-keygen"><a href="#什么是-ssh-keygen" class="headerlink" title="什么是 ssh-keygen"></a>什么是 ssh-keygen</h3><blockquote>
+<p>ssh-keygen 是一个用来生成、创建和管理 SSH 认证用的公私钥的工具。通过 ssh-keygen 命令，用户可以创建支持SSH1 和 SSH2 两个协议的密钥。ssh-keygen 为 SSH1 协议创建 RSA 密钥，SSH2 则可以是 RSA 或 DSA。</p>
+</blockquote>
+<h3 id="什么是-ssh-copy-id"><a href="#什么是-ssh-copy-id" class="headerlink" title="什么是 ssh-copy-id"></a>什么是 ssh-copy-id</h3><blockquote>
+<p>ssh-copy-id 是用来将本地公钥拷贝到远程的 authorized_keys 文件的脚本命令，它还会将身份标识文件追加到远程机器的 ~/.ssh/authorized_keys 文件中，并给远程主机的用户主目录适当的的权限。</p>
+</blockquote>
+<h3 id="SSH-密钥"><a href="#SSH-密钥" class="headerlink" title="SSH 密钥"></a>SSH 密钥</h3><blockquote>
+<p>SSH 密钥为登录 Linux 服务器提供了更好且安全的机制。运行 ssh-keygen 后，将会生成公私密钥对。你可以将公钥放置到任意服务器，从持有私钥的客户端连接到服务器的时，会用它来解锁。两者匹配时，系统无需密码就能解除锁定。</p>
+</blockquote>
+<h2 id="Do-It"><a href="#Do-It" class="headerlink" title="Do It"></a>Do It</h2><blockquote>
+<p>在 CentOS 和 RHEL 上设置免密码登录 SSH</p>
+</blockquote>
+<h3 id="执行SSH登录"><a href="#执行SSH登录" class="headerlink" title="执行SSH登录"></a>执行SSH登录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@node1 ~]<span class="comment"># ssh root@192.168.0.10</span></div><div class="line">The authenticity of host <span class="string">'192.168.0.10 (192.168.0.10)'</span> can<span class="string">'t be established.</span></div><div class="line">RSA key fingerprint is 6d:8f:63:9b:3b:63:e1:72:b3:06:a4:e4:f4:37:21:42.</div><div class="line">Are you sure you want to continue connecting (yes/no)? yes</div><div class="line">Warning: Permanently added '192.168.0.10<span class="string">' (RSA) to the list of known hosts.</span></div><div class="line">root@192.168.0.10's password:</div><div class="line">Last login: Thu Dec 10 22:04:55 2015 from 192.168.0.1</div></pre></td></tr></table></figure>
+<h3 id="使用-ssh-key-gen-命令生成公钥和私钥，这里要注意的是可以对私钥进行加密保护以增强安全性。"><a href="#使用-ssh-key-gen-命令生成公钥和私钥，这里要注意的是可以对私钥进行加密保护以增强安全性。" class="headerlink" title="使用 ssh-key-gen 命令生成公钥和私钥，这里要注意的是可以对私钥进行加密保护以增强安全性。"></a>使用 ssh-key-gen 命令生成公钥和私钥，这里要注意的是可以对私钥进行加密保护以增强安全性。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">[root@node1 ~]<span class="comment"># ssh-keygen</span></div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/root/.ssh/id_rsa):</div><div class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</div><div class="line">Enter same passphrase again:</div><div class="line">Your identification has been saved <span class="keyword">in</span> /root/.ssh/id_rsa.</div><div class="line">Your public key has been saved <span class="keyword">in</span> /root/.ssh/id_rsa.pub.</div><div class="line">The key fingerprint is:</div><div class="line">b4:51:7e:1e:52:61:<span class="built_in">cd</span>:fb:b2:98:4b:ad:a1:8b:31:6d root@node1.ehowstuff.local</div><div class="line">The key<span class="string">'s randomart image is:</span></div><div class="line">+--[ RSA 2048]----+</div><div class="line">|          . ++   |</div><div class="line">|         o o  o  |</div><div class="line">|        o o o  . |</div><div class="line">|       . o + ..  |</div><div class="line">|        S   .  . |</div><div class="line">|         .   .. .|</div><div class="line">|        o E oo.o |</div><div class="line">|         = ooo.  |</div><div class="line">|        . o.o.   |</div><div class="line">+-----------------+</div></pre></td></tr></table></figure>
+<h3 id="用-ssh-copy-id-命令将公钥复制或上传到远程主机，并将身份标识文件追加到节点2的-ssh-authorized-keys-中："><a href="#用-ssh-copy-id-命令将公钥复制或上传到远程主机，并将身份标识文件追加到节点2的-ssh-authorized-keys-中：" class="headerlink" title="用 ssh-copy-id 命令将公钥复制或上传到远程主机，并将身份标识文件追加到节点2的 ~/.ssh/authorized_keys 中："></a>用 ssh-copy-id 命令将公钥复制或上传到远程主机，并将身份标识文件追加到节点2的 ~/.ssh/authorized_keys 中：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@node1 ~]<span class="comment"># ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.0.10</span></div><div class="line">root@192.168.0.10<span class="string">'s password:</span></div><div class="line">Now try logging into the machine, with "ssh '192.168.0.10<span class="string">'", and check in:</span></div><div class="line">.ssh/authorized_keys</div><div class="line">to make sure we haven't added extra keys that you weren<span class="string">'t expecting.</span></div></pre></td></tr></table></figure>
+<h3 id="验证免密码-SSH-登录节点2："><a href="#验证免密码-SSH-登录节点2：" class="headerlink" title="验证免密码 SSH 登录节点2："></a>验证免密码 SSH 登录节点2：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@node1 ~]<span class="comment"># ssh root@192.168.0.10</span></div><div class="line">Last login: Sun Dec 13 14:03:20 2015 from www.ehowstuff.local</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;执行环境&quot;&gt;&lt;a href=&quot;#执行环境&quot; class=&quot;headerlink&quot; title=&quot;执行环境&quot;&gt;&lt;/a&gt;执行环境&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;CentOS 6.5&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;概念科普&quot;&gt;&lt;a href=&quot;#概念科普&quot; clas
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://blog.pigo.top/categories/Linux/"/>
+    
+    
+      <category term="SSH" scheme="http://blog.pigo.top/tags/SSH/"/>
+    
+      <category term="免密码" scheme="http://blog.pigo.top/tags/%E5%85%8D%E5%AF%86%E7%A0%81/"/>
+    
+  </entry>
   
   <entry>
     <title>MySQL优化实战宝典（1）</title>

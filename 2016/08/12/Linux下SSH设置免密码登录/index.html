@@ -14,16 +14,44 @@
 <meta name="author" content="Pigo残" />
 
 
-    
-    
 
+<meta name="description" content="执行环境
+CentOS 6.5
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Pigo残的Madhouses">
-<meta property="og:url" content="http://blog.pigo.top/index.html">
+概念科普通过配置 SSH 免密码登录，你可以享受到如下的便利：
+
+用脚本实现日常工作的自动化。
+增强 Linux 服务器的安全性。这是防范虚拟专用服务器（VPS）遭受暴力破解攻击的一个推荐的方法，SSH 密钥单凭暴力破解是几乎不可攻破的。
+
+什么是 ssh-keygen
+ssh-keygen 是一个用来生成、创建和管理 SSH 认证用的公私钥的工具。通过 ssh-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux下SSH设置免密码登录">
+<meta property="og:url" content="http://blog.pigo.top/2016/08/12/Linux下SSH设置免密码登录/index.html">
 <meta property="og:site_name" content="Pigo残的Madhouses">
+<meta property="og:description" content="执行环境
+CentOS 6.5
+
+概念科普通过配置 SSH 免密码登录，你可以享受到如下的便利：
+
+用脚本实现日常工作的自动化。
+增强 Linux 服务器的安全性。这是防范虚拟专用服务器（VPS）遭受暴力破解攻击的一个推荐的方法，SSH 密钥单凭暴力破解是几乎不可攻破的。
+
+什么是 ssh-keygen
+ssh-keygen 是一个用来生成、创建和管理 SSH 认证用的公私钥的工具。通过 ssh-">
+<meta property="og:updated_time" content="2016-08-12T05:33:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pigo残的Madhouses">
+<meta name="twitter:title" content="Linux下SSH设置免密码登录">
+<meta name="twitter:description" content="执行环境
+CentOS 6.5
+
+概念科普通过配置 SSH 免密码登录，你可以享受到如下的便利：
+
+用脚本实现日常工作的自动化。
+增强 Linux 服务器的安全性。这是防范虚拟专用服务器（VPS）遭受暴力破解攻击的一个推荐的方法，SSH 密钥单凭暴力破解是几乎不可攻破的。
+
+什么是 ssh-keygen
+ssh-keygen 是一个用来生成、创建和管理 SSH 认证用的公私钥的工具。通过 ssh-">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -51,13 +79,11 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
-    <style> .article { opacity: 0;} </style>
-
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Pigo残的Madhouses</title>
+<title>Linux下SSH设置免密码登录 | Pigo残的Madhouses</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -66,8 +92,8 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: true,
-        isPost: false,
+        isHome: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -273,9 +299,7 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-Linux下SSH设置免密码登录" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Linux下SSH设置免密码登录" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/08/12/Linux下SSH设置免密码登录/" class="article-date">
@@ -291,12 +315,27 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/Linux下SSH设置免密码登录/">Linux下SSH设置免密码登录</a>
+    <h1 class="article-title" itemprop="name">
+      Linux下SSH设置免密码登录
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/免密码/">免密码</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -330,162 +369,64 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/免密码/">免密码</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
   
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-MySQL优化实战宝典（1）" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/11/MySQL优化实战宝典（1）/" class="article-date">
-      <time datetime="2016-08-11T15:57:47.000Z" itemprop="datePublished">2016-08-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+
+
+    <nav id="article-nav">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/11/MySQL优化实战宝典（1）/">MySQL优化实战宝典（1）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="Or条件可以利用索引儿避免全表扫描"><a href="#Or条件可以利用索引儿避免全表扫描" class="headerlink" title="Or条件可以利用索引儿避免全表扫描"></a>Or条件可以利用索引儿避免全表扫描</h2><blockquote>
-<p>一般在mysql中，在查询语句语句中带有<code>or</code>关键字时，会造成全表扫表，接下来我们着重分析下，哪些情况下可以避免全表扫面</p>
-</blockquote>
-<h3 id="当where语句里面带or关键字时，myisam引擎可以利用索引，而innodb不行"><a href="#当where语句里面带or关键字时，myisam引擎可以利用索引，而innodb不行" class="headerlink" title="当where语句里面带or关键字时，myisam引擎可以利用索引，而innodb不行"></a>当<code>where</code>语句里面带<code>or</code>关键字时，<code>myisam</code>引擎可以利用索引，而<code>innodb</code>不行</h3>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/db/">db</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/优化/">优化</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/08/11/MySQL优化实战宝典（1）/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-监控CDN的厉害shell-0-0" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/15/监控CDN的厉害shell-0-0/" class="article-date">
-      <time datetime="2015-06-15T10:19:56.000Z" itemprop="datePublished">2015-06-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/15/监控CDN的厉害shell-0-0/">如何通过shell监控CDN是否正常</a>
-    </h1>
-  
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/08/11/MySQL优化实战宝典（1）/">
+                    MySQL优化实战宝典（1）
+                </a>
+            </div>
+        
+    </nav>
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>先说说基本的思路，然后再贴上详细的代码</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CDN/">CDN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2015/06/15/监控CDN的厉害shell-0-0/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
   
 </article>
 
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#执行环境"><span class="toc-number">1.</span> <span class="toc-text">执行环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概念科普"><span class="toc-number">2.</span> <span class="toc-text">概念科普</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是-ssh-keygen"><span class="toc-number">2.1.</span> <span class="toc-text">什么是 ssh-keygen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是-ssh-copy-id"><span class="toc-number">2.2.</span> <span class="toc-text">什么是 ssh-copy-id</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-密钥"><span class="toc-number">2.3.</span> <span class="toc-text">SSH 密钥</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Do-It"><span class="toc-number">3.</span> <span class="toc-text">Do It</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#执行SSH登录"><span class="toc-number">3.1.</span> <span class="toc-text">执行SSH登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-ssh-key-gen-命令生成公钥和私钥，这里要注意的是可以对私钥进行加密保护以增强安全性。"><span class="toc-number">3.2.</span> <span class="toc-text">使用 ssh-key-gen 命令生成公钥和私钥，这里要注意的是可以对私钥进行加密保护以增强安全性。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用-ssh-copy-id-命令将公钥复制或上传到远程主机，并将身份标识文件追加到节点2的-ssh-authorized-keys-中："><span class="toc-number">3.3.</span> <span class="toc-text">用 ssh-copy-id 命令将公钥复制或上传到远程主机，并将身份标识文件追加到节点2的 ~/.ssh/authorized_keys 中：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证免密码-SSH-登录节点2："><span class="toc-number">3.4.</span> <span class="toc-text">验证免密码 SSH 登录节点2：</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script>
+    yiliaConfig.toc = ["隐藏目录", "显示目录", !!"true"];
+</script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Linux下SSH设置免密码登录　| Pigo残的Madhouses　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
 
 
 
@@ -493,9 +434,52 @@
 
 
 
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" data-thread-key="2016/08/12/Linux下SSH设置免密码登录/" data-title="Linux下SSH设置免密码登录" data-url="http://blog.pigo.top/2016/08/12/Linux下SSH设置免密码登录/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"rushingpig"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
 
-  
-  
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/08/11/MySQL优化实战宝典（1）/" title="下一篇: MySQL优化实战宝典（1）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/12/Linux下SSH设置免密码登录/">Linux下SSH设置免密码登录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/11/MySQL优化实战宝典（1）/">MySQL优化实战宝典（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/15/监控CDN的厉害shell-0-0/">如何通过shell监控CDN是否正常</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
