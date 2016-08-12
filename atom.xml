@@ -143,7 +143,7 @@
     <link href="http://blog.pigo.top/2015/06/15/%E7%9B%91%E6%8E%A7CDN%E7%9A%84%E5%8E%89%E5%AE%B3shell-0-0/"/>
     <id>http://blog.pigo.top/2015/06/15/监控CDN的厉害shell-0-0/</id>
     <published>2015-06-15T10:19:56.000Z</published>
-    <updated>2016-08-11T16:56:23.000Z</updated>
+    <updated>2016-08-12T13:44:39.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>先说说基本的思路，然后再贴上详细的代码</p>
 <a id="more"></a>
@@ -155,7 +155,7 @@
     
     </summary>
     
-      <category term="linux" scheme="http://blog.pigo.top/categories/linux/"/>
+      <category term="Linux" scheme="http://blog.pigo.top/categories/Linux/"/>
     
     
       <category term="shell" scheme="http://blog.pigo.top/tags/shell/"/>
