@@ -12,11 +12,12 @@
 <h2 id="概念科普"><a href="#概念科普" class="headerlink" title="概念科普"></a>概念科普</h2><p>通过配置 SSH 免密码登录，你可以享受到如下的便利：</p>
 <ul>
 <li>用脚本实现日常工作的自动化。</li>
-<li>增强 Linux 服务器的安全性。这是防范虚拟专用服务器（VPS）遭受暴力破解攻击的一个推荐的方法，SSH 密钥单凭暴力破解是几乎不可攻破的。</li>
-</ul>
+<li>增强 Linux 服务器的安全性。这是防范虚拟专用服务器（VPS）遭受暴力破解攻击的一个推荐的方法，SSH 密钥单凭暴力破解是几乎不可攻破的。<a id="more"></a>
 <h3 id="什么是-ssh-keygen"><a href="#什么是-ssh-keygen" class="headerlink" title="什么是 ssh-keygen"></a>什么是 ssh-keygen</h3><blockquote>
 <p>ssh-keygen 是一个用来生成、创建和管理 SSH 认证用的公私钥的工具。通过 ssh-keygen 命令，用户可以创建支持SSH1 和 SSH2 两个协议的密钥。ssh-keygen 为 SSH1 协议创建 RSA 密钥，SSH2 则可以是 RSA 或 DSA。</p>
 </blockquote>
+</li>
+</ul>
 <h3 id="什么是-ssh-copy-id"><a href="#什么是-ssh-copy-id" class="headerlink" title="什么是 ssh-copy-id"></a>什么是 ssh-copy-id</h3><blockquote>
 <p>ssh-copy-id 是用来将本地公钥拷贝到远程的 authorized_keys 文件的脚本命令，它还会将身份标识文件追加到远程机器的 ~/.ssh/authorized_keys 文件中，并给远程主机的用户主目录适当的的权限。</p>
 </blockquote>
